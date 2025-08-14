@@ -646,39 +646,43 @@
 
             // In a real implementation, you would fetch this data from a database or JSON
             const infoData = {
-                'info1': {
-                    title: 'Waspada Clone Dan Penipuan',
-                    date: 'Posted: 15 Agustus 2025',
-                    image: '1.jpg',
-                    description: 'ZiaanStore mengeluarkan himbauan resmi kepada seluruh pelanggan untuk mengantisipasi maraknya akun palsu yang mengatasnamakan ZiaanStore.Melalui pernyataan resminya, ZiaanStore menegaskan bahwa pihaknya hanya memiliki tiga kanal resmi, yaitu WhatsApp 0856-9104-6873, Instagram @ziaanstore, dan website ziaanofficial.github.io Pelanggan diminta untuk selalu memverifikasi kebenaran informasi sebelum melakukan transaksi.'
-                },
-                'info2': {
-                    title: 'Special Promotion',
-                    date: 'Posted: 1 June 2023',
-                    image: 'berita2.png',
-                    description: 'For the month of June, we are offering special discounts on all top-up services. Get 10% bonus credit on every purchase over 100k. Promotion valid until June 30th.'
-                }
-            };
-
-            const data = infoData[id];
-            title.textContent = data.title;
-            date.textContent = data.date;
-            image.src = data.image;
-            image.alt = data.title;
-            desc.textContent = data.description;
-
-            modal.style.display = 'block';
+            title: "Waspada Clone Dan Penipuan",
+            date: "Posted: 15 Agustus 2025",
+            image: "1.jpg",
+            description: `Kami mengimbau pelanggan untuk selalu berhati-hati terhadap pihak yang
+            mengaku sebagai ZiaanStore namun meminta pembayaran di luar nomor resmi kami.
+            Selalu periksa nomor rekening atau nomor WhatsApp yang tertera di website resmi ini.`
+        },
+        info2: {
+            title: "Special Promotion",
+            date: "Posted: 1 June 2023",
+            image: "berita2.png",
+            description: `Dapatkan diskon khusus untuk berbagai produk kami selama periode promo ini Jangan lewatkan kesempatan untuk mendapatkan harga terbaik`
         }
+    };
 
-        function closeModal() {
-            document.getElementById('info-modal').style.display = 'none';
-        }
+    function showInfoDetail(id) {
+        const modal = document.getElementById('info-modal');
+        const data = infoDetails[id];
+        if (!data) return;
 
-        // Close modal when clicking outside content
-        window.onclick = function(event) {
-            const modal = document.getElementById('info-modal');
-            if (event.target == modal) {
-                modal.style.display = 'none';
+        document.getElementById('modal-title').textContent = data.title;
+        document.getElementById('modal-date').textContent = data.date;
+        document.getElementById('modal-image').src = data.image;
+        document.getElementById('modal-description').textContent = data.description;
+
+        modal.style.display = 'block';
+    }
+
+    function closeModal() {
+        document.getElementById('info-modal').style.display = 'none';
+    }
+
+    // Tutup modal jika klik di luar konten
+    window.onclick = function(event) {
+        const modal = document.getElementById('info-modal');
+        if (event.target === modal) {
+            modal.style.display = "none";
             }
         }
 
