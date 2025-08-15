@@ -555,6 +555,233 @@
             background: var(--primary);
         }
 
+        /* Market Page Styles */
+        .market-container {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: var(--curve);
+            padding: 3rem;
+            margin: 2rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .market-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+            z-index: -1;
+        }
+
+        .market-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            background: linear-gradient(to right, var(--accent), var(--highlight));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .market-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--highlight);
+            border-radius: 2px;
+        }
+
+        .market-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .market-tab {
+            padding: 0.8rem 1.5rem;
+            background: rgba(56, 189, 248, 0.1);
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            font-weight: 500;
+        }
+
+        .market-tab.active {
+            background: rgba(56, 189, 248, 0.3);
+            color: var(--accent);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .market-tab:hover {
+            background: rgba(56, 189, 248, 0.2);
+        }
+
+        .market-content {
+            display: none;
+        }
+
+        .market-content.active {
+            display: block;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .product-card {
+            background: rgba(56, 189, 248, 0.1);
+            border-radius: var(--curve);
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        .product-card-content {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+
+        .product-price {
+            color: var(--highlight);
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .product-excerpt {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            max-height: 100px;
+            overflow-y: auto;
+        }
+
+        .product-excerpt::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .product-excerpt::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        .product-excerpt::-webkit-scrollbar-thumb {
+            background: var(--highlight);
+            border-radius: 4px;
+        }
+
+        .buy-button {
+            display: inline-block;
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+            border-radius: 9999px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .buy-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Product Modal Styles */
+        .product-modal-content {
+            background: rgba(30, 41, 59, 0.9);
+            backdrop-filter: blur(10px);
+            color: var(--accent);
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: var(--curve);
+            width: 80%;
+            max-width: 800px;
+            position: relative;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        .modal-product-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .modal-product-price {
+            font-size: 1.5rem;
+            color: var(--highlight);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .modal-product-description {
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .modal-product-description::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .modal-product-description::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        .modal-product-description::-webkit-scrollbar-thumb {
+            background: var(--highlight);
+            border-radius: 4px;
+        }
+
+        .modal-product-description::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+
         @media (max-width: 768px) {
             nav {
                 flex-direction: column;
@@ -566,12 +793,12 @@
                 justify-content: center;
             }
             
-            .about-container, .social-container {
+            .about-container, .social-container, .info-container, .market-container {
                 padding: 2rem 1.5rem;
                 margin: 1rem 0;
             }
             
-            .about-title {
+            .about-title, .info-title, .market-title {
                 font-size: 2rem;
             }
             
@@ -583,6 +810,15 @@
                 width: 100%;
                 max-width: 300px;
             }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content, .product-modal-content {
+                width: 90%;
+                padding: 1.5rem;
+            }
         }
     </style>
 </head>
@@ -592,6 +828,7 @@
             <div class="logo">ZIAANSTORE</div>
             <div class="nav-links">
                 <a href="#" class="nav-link" data-page="about">About</a>
+                <a href="#" class="nav-link" data-page="market">Market</a>
                 <a href="#" class="nav-link" data-page="social">Social Media</a>
                 <a href="#" class="nav-link" data-page="info">Information</a>
             </div>
@@ -619,6 +856,267 @@
                 <p class="about-content">
                     Sejak 2023, ZiaanStore menjadi mitra tepercaya untuk kebutuhan akun game, top up, dan berbagai produk digital. Kami mengutamakan proses cepat, layanan responsif 24/7, serta keamanan transaksi yang terjamin. Dengan ratusan pelanggan puas, kami terus berkomitmen menghadirkan pengalaman berbelanja digital yang aman, mudah, dan menguntungkan.
                 </p>
+            </div>
+        </section>
+        
+        <section id="market" class="page">
+            <div class="market-container">
+                <h1 class="market-title">ZIAANSTORE MARKET</h1>
+                
+                <div class="market-tabs">
+                    <div class="market-tab active" data-tab="topup">Top Up Game</div>
+                    <div class="market-tab" data-tab="joki">Joki Game</div>
+                    <div class="market-tab" data-tab="akun">Akun Game</div>
+                </div>
+                
+                <!-- Top Up Products -->
+                <div id="topup-content" class="market-content active">
+                    <div class="products-grid">
+                        <!-- Product 1 -->
+                        <div class="product-card">
+                            <img src="https://via.placeholder.com/300x200?text=Mobile+Legends" alt="Mobile Legends Top Up" class="product-image" onclick="showProductDetail('topup1')">
+                            <div class="product-card-content">
+                                <h3 class="product-title">Mobile Legends Diamond</h3>
+                                <div class="product-price">Rp 10.000</div>
+                                <div class="product-excerpt">
+                                    Top up Diamond Mobile Legends dengan harga termurah dan proses instan. Dapatkan bonus diamond dan skin eksklusif.
+                                </div>
+                                <button class="buy-button" onclick="buyProduct('Mobile Legends Diamond')">Beli Sekarang</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 2 -->
+                        <div class="product-card">
+                            <img src="https://via.placeholder.com/300x200?text=Free+Fire" alt="Free Fire Top Up" class="product-image" onclick="showProductDetail('topup2')">
+                            <div class="product-card-content">
+                                <h3 class="product-title">Free Fire Diamond</h3>
+                                <div class="product-price">Rp 15.000</div>
+                                <div class="product-excerpt">
+                                    Top up Diamond Free Fire dengan proses cepat dan aman. Bonus voucher dan skin eksklusif untuk pembelian pertama.
+                                </div>
+                                <button class="buy-button" onclick="buyProduct('Free Fire Diamond')">Beli Sekarang</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 3 -->
+                        <div class="product-card">
+                            <img src="https://via.placeholder.com/300x200?text=Valorant" alt="Valorant Top Up" class="product-image" onclick="showProductDetail('topup3')">
+                            <div class="product-card-content">
+                                <h3 class="product-title">Valorant Points</h3>
+                                <div class="product-price">Rp 25.000</div>
+                                <div class="product-excerpt">
+                                    Top up Valorant Points untuk membeli skin dan battle pass. Proses instan tanpa perlu login.
+                                </div>
+                                <button class="buy-button" onclick="buyProduct('Valorant Points')">Beli Sekarang</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 4 -->
+                        <div class="product-card">
+                            <img src="https://via.placeholder.com/300x200?text=Genshin+Impact" alt="Genshin Impact Top Up" class="product-image" onclick="showProductDetail('topup4')">
+                            <div class="product-card-content">
+                                <h3 class="product-title">Genshin Impact Genesis Crystal</h3>
+                                <div class="product-price">Rp 50.000</div>
+                                <div class="product-excerpt">
+                                    Top up Genesis Crystal Genshin Impact dengan harga spesial. Dapatkan bonus Welkin Moon untuk pembelian besar.
+                                </div>
+                                <button class="buy-button" onclick="buyProduct('Genshin Impact Genesis Crystal')">Beli Sekarang</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 5 -->
+                        <div class="product-card">
+                            <img src="https://via.placeholder.com/300x200?text=PubG" alt="PubG Top Up" class="product-image" onclick="showProductDetail('topup5')">
+                            <div class="product-card-content">
+                                <h3 class="product-title">PUBG Mobile UC</h3>
+                                <div class="product-price">Rp 20.000</div>
+                                <div class="product-excerpt">
+                                    Top up UC PUBG Mobile untuk membeli skin dan item eksklusif. Proses cepat dan aman dengan garansi 100%.
+                                </div>
+                                <button class="buy-button" onclick="buyProduct('PUBG Mobile UC')">Beli Sekarang</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 6 -->
+                        <div class="product-card">
+                            <img src="https://via.placeholder.com/300x200?text=Call+of+Duty" alt="Call of Duty Top Up" class="product-image" onclick="showProductDetail('topup6')">
+                            <div class="product-card-content">
+                                <h3 class="product-title">Call of Duty Points</h3>
+                                <div class="product-price">Rp 30.000</div>
+                                <div class="product-excerpt">
+                                    Top up CP Call of Duty Mobile untuk membeli battle pass dan skin legendaris. Bonus double CP untuk pembelian pertama.
+                                </div>
+                                <button class="buy-button" onclick="buyProduct('Call of Duty Points')">Beli Sekarang</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Joki Products -->
+                <div id="joki-content" class="market-content">
+                    <div class="products-grid">
+                        <!-- Product 1 -->
+                        <div class="product-card">
+                            <img src="https://files.catbox.moe/wx5lm0.png" alt="Mobile Legends Joki" class="product-image" onclick="showProductDetail('joki1')">
+                            <div class="product-card-content">
+                                <h3 class="product-title">Joki Rank Mobile Legends</h3>
+                                <div class="product-price">Rp 50.000</div>
+                                <div class="product-excerpt">
+                                    Jasa joki rank Mobile Legends dari Epic ke Legend dengan winrate tinggi. Garansi tidak turun rank.
+                                </div>
+                                <button class="buy-button" onclick="buyProduct('Joki Rank Mobile Legends')">Beli Sekarang</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 2 -->
+                        <div class="product-card">
+                            <img src="https://via.placeholder.com/300x200?text=FF+Joki" alt="Free Fire Joki" class="product-image" onclick="showProductDetail('joki2')">
+                            <div class="product-card-content">
+                                <h3 class="product-title">Joki Rank Free Fire</h3>
+                                <div class="product-price">Rp 75.000</div>
+                                <div class="product-excerpt">
+                                    Jasa joki rank Free Fire dari Gold ke Diamond. Proses cepat dengan player profesional.
+                                </div>
+                                <button class="buy-button" onclick="buyProduct('Joki Rank Free Fire')">Beli Sekarang</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 3 -->
+                        <div class="product-card">
+                            <img src="https://via.placeholder.com/300x200?text=Valorant+Joki" alt="Valorant Joki" class="product-image" onclick="showProductDetail('joki3')">
+                            <div class="product-card-content">
+                                <h3 class="product-title">Joki Rank Valorant</h3>
+                                <div class="product-price">Rp 100.000</div>
+                                <div class="product-excerpt">
+                                    Jasa joki rank Valorant dari Iron ke Gold. Dibantu oleh player dengan rating Radiant.
+                                </div>
+                                <button class="buy-button" onclick="buyProduct('Joki Rank Valorant')">Beli Sekarang</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 4 -->
+                        <div class="product-card">
+                            <img src="https://via.placeholder.com/300x200?text=Genshin+Joki" alt="Genshin Impact Joki" class="product-image" onclick="showProductDetail('joki4')">
+                            <div class="product-card-content">
+                                <h3 class="product-title">Joki Adventure Rank Genshin</h3>
+                                <div class="product-price">Rp 150.000</div>
+                                <div class="product-excerpt">
+                                    Jasa meningkatkan Adventure Rank Genshin Impact dengan cepat. Termasuk quest dan material farming.
+                                </div>
+                                <button class="buy-button" onclick="buyProduct('Joki Adventure Rank Genshin')">Beli Sekarang</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 5 -->
+                        <div class="product-card">
+                            <img src="https://via.placeholder.com/300x200?text=PubG+Joki" alt="PubG Joki" class="product-image" onclick="showProductDetail('joki5')">
+                            <div class="product-card-content">
+                                <h3 class="product-title">Joki Tier PUBG Mobile</h3>
+                                <div class="product-price">Rp 80.000</div>
+                                <div class="product-excerpt">
+                                    Jasa meningkatkan tier PUBG Mobile dari Platinum ke Crown. Dibantu oleh player dengan K/D tinggi.
+                                </div>
+                                <button class="buy-button" onclick="buyProduct('Joki Tier PUBG Mobile')">Beli Sekarang</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 6 -->
+                        <div class="product-card">
+                            <img src="https://via.placeholder.com/300x200?text=AOV+Joki" alt="Arena of Valor Joki" class="product-image" onclick="showProductDetail('joki6')">
+                            <div class="product-card-content">
+                                <h3 class="product-title">Joki Rank Arena of Valor</h3>
+                                <div class="product-price">Rp 60.000</div>
+                                <div class="product-excerpt">
+                                    Jasa joki rank Arena of Valor dari Gold ke Diamond. Proses cepat dengan winrate di atas 80%.
+                                </div>
+                                <button class="buy-button" onclick="buyProduct('Joki Rank Arena of Valor')">Beli Sekarang</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Akun Products -->
+                <div id="akun-content" class="market-content">
+                    <div class="products-grid">
+                        <!-- Product 1 -->
+                        <div class="product-card">
+                            <img src="https://via.placeholder.com/300x200?text=ML+Akun" alt="Mobile Legends Akun" class="product-image" onclick="showProductDetail('akun1')">
+                            <div class="product-card-content">
+                                <h3 class="product-title">Akun Mobile Legends Mythic</h3>
+                                <div class="product-price">Rp 500.000</div>
+                                <div class="product-excerpt">
+                                    Akun Mobile Legends tier Mythic dengan koleksi skin lengkap dan hero meta. Sudah verifikasi Moonton.
+                                </div>
+                                <button class="buy-button" onclick="buyProduct('Akun Mobile Legends Mythic')">Beli Sekarang</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 2 -->
+                        <div class="product-card">
+                            <img src="https://via.placeholder.com/300x200?text=FF+Akun" alt="Free Fire Akun" class="product-image" onclick="showProductDetail('akun2')">
+                            <div class="product-card-content">
+                                <h3 class="product-title">Akun Free Fire Heroic</h3>
+                                <div class="product-price">Rp 750.000</div>
+                                <div class="product-excerpt">
+                                    Akun Free Fire tier Heroic dengan skin elite dan karakter langka. Sudah verifikasi Garena.
+                                </div>
+                                <button class="buy-button" onclick="buyProduct('Akun Free Fire Heroic')">Beli Sekarang</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 3 -->
+                        <div class="product-card">
+                            <img src="https://via.placeholder.com/300x200?text=Valorant+Akun" alt="Valorant Akun" class="product-image" onclick="showProductDetail('akun3')">
+                            <div class="product-card-content">
+                                <h3 class="product-title">Akun Valorant Radiant</h3>
+                                <div class="product-price">Rp 1.200.000</div>
+                                <div class="product-excerpt">
+                                    Akun Valorant tier Radiant dengan koleksi skin premium dan battle pass lengkap. Sudah verifikasi Riot.
+                                </div>
+                                <button class="buy-button" onclick="buyProduct('Akun Valorant Radiant')">Beli Sekarang</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 4 -->
+                        <div class="product-card">
+                            <img src="https://via.placeholder.com/300x200?text=Genshin+Akun" alt="Genshin Impact Akun" class="product-image" onclick="showProductDetail('akun4')">
+                            <div class="product-card-content">
+                                <h3 class="product-title">Akun Genshin Impact AR55</h3>
+                                <div class="product-price">Rp 800.000</div>
+                                <div class="product-excerpt">
+                                    Akun Genshin Impact Adventure Rank 55 dengan 5 karakter 5* dan senjata 5*. Primogem masih banyak.
+                                </div>
+                                <button class="buy-button" onclick="buyProduct('Akun Genshin Impact AR55')">Beli Sekarang</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 5 -->
+                        <div class="product-card">
+                            <img src="https://via.placeholder.com/300x200?text=PubG+Akun" alt="PubG Akun" class="product-image" onclick="showProductDetail('akun5')">
+                            <div class="product-card-content">
+                                <h3 class="product-title">Akun PUBG Mobile Conqueror</h3>
+                                <div class="product-price">Rp 900.000</div>
+                                <div class="product-excerpt">
+                                    Akun PUBG Mobile tier Conqueror dengan skin elite dan UC berlimpah. Sudah verifikasi Tencent.
+                                </div>
+                                <button class="buy-button" onclick="buyProduct('Akun PUBG Mobile Conqueror')">Beli Sekarang</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 6 -->
+                        <div class="product-card">
+                            <img src="https://via.placeholder.com/300x200?text=LoL+Akun" alt="League of Legends Akun" class="product-image" onclick="showProductDetail('akun6')">
+                            <div class="product-card-content">
+                                <h3 class="product-title">Akun LoL Challenger</h3>
+                                <div class="product-price">Rp 1.500.000</div>
+                                <div class="product-excerpt">
+                                    Akun League of Legends tier Challenger dengan koleksi skin lengkap dan champion meta. Sudah verifikasi Riot.
+                                </div>
+                                <button class="buy-button" onclick="buyProduct('Akun LoL Challenger')">Beli Sekarang</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
         
@@ -675,6 +1173,7 @@
         </section>
     </main>
 
+    <!-- Info Modal -->
     <div id="info-modal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
@@ -682,6 +1181,18 @@
             <div id="modal-date" class="info-date"></div>
             <img id="modal-image" src="" alt="" class="modal-image">
             <div id="modal-description" class="modal-description"></div>
+        </div>
+    </div>
+    
+    <!-- Product Modal -->
+    <div id="product-modal" class="modal">
+        <div class="product-modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modal-product-title" class="modal-product-title"></h2>
+            <div id="modal-product-price" class="modal-product-price"></div>
+            <img id="modal-product-image" src="" alt="" class="modal-image">
+            <div id="modal-product-description" class="modal-product-description"></div>
+            <button class="buy-button" onclick="buyProduct(document.getElementById('modal-product-title').textContent)" style="margin-top: 1.5rem;">Beli Sekarang</button>
         </div>
     </div>
     
@@ -702,6 +1213,21 @@
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
                     activatePage(this.getAttribute('data-page'));
+                });
+            });
+
+            // Market tab functionality
+            document.querySelectorAll('.market-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // Update active tab
+                    document.querySelectorAll('.market-tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Update active content
+                    document.querySelectorAll('.market-content').forEach(c => c.classList.remove('active'));
+                    document.getElementById(`${tabId}-content`).classList.add('active');
                 });
             });
 
@@ -769,24 +1295,171 @@
             desc.textContent = data.description;
 
             modal.style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevent background scroll
+        }
+
+        // Product modal functions
+        function showProductDetail(id) {
+            const modal = document.getElementById('product-modal');
+            const title = document.getElementById('modal-product-title');
+            const price = document.getElementById('modal-product-price');
+            const image = document.getElementById('modal-product-image');
+            const desc = document.getElementById('modal-product-description');
+
+            // Sample product data - in a real app, this would come from a database
+            const productData = {
+                'topup1': {
+                    title: 'Mobile Legends Diamond',
+                    price: 'Rp 10.000',
+                    image: 'https://via.placeholder.com/800x400?text=Mobile+Legends+Detail',
+                    description: 'Top up Diamond Mobile Legends dengan harga termurah dan proses instan. Dapatkan bonus diamond dan skin eksklusif untuk setiap pembelian.\n\nKeuntungan:\n- Proses instan (1-5 menit)\n- Harga termurah di pasaran\n- Bonus diamond 5% untuk pembelian pertama\n- Bonus skin eksklusif season ini\n- Garansi 100% uang kembali jika diamond tidak masuk\n\nCara order:\n1. Pilih jumlah diamond\n2. Masukkan ID Mobile Legends\n3. Lakukan pembayaran\n4. Diamond akan masuk secara otomatis'
+                },
+                'topup2': {
+                    title: 'Free Fire Diamond',
+                    price: 'Rp 15.000',
+                    image: 'https://via.placeholder.com/800x400?text=Free+Fire+Detail',
+                    description: 'Top up Diamond Free Fire dengan proses cepat dan aman. Bonus voucher dan skin eksklusif untuk pembelian pertama.\n\nKeuntungan:\n- Proses cepat (3-7 menit)\n- Bonus voucher senilai Rp 5.000\n- Skin eksklusif season 15\n- Support 24/7\n- Garansi diamond masuk 100%'
+                },
+                'topup3': {
+                    title: 'Valorant Points',
+                    price: 'Rp 25.000',
+                    image: 'https://via.placeholder.com/800x400?text=Valorant+Detail',
+                    description: 'Top up Valorant Points untuk membeli skin dan battle pass. Proses instan tanpa perlu login.\n\nKeuntungan:\n- Tanpa perlu login akun\n- Proses instan (1-3 menit)\n- Bonus 10% VP untuk pembelian pertama\n- Support semua region\n- Garansi uang kembali jika VP tidak masuk'
+                },
+                'topup4': {
+                    title: 'Genshin Impact Genesis Crystal',
+                    price: 'Rp 50.000',
+                    image: 'https://via.placeholder.com/800x400?text=Genshin+Detail',
+                    description: 'Top up Genesis Crystal Genshin Impact dengan harga spesial. Dapatkan bonus Welkin Moon untuk pembelian besar.\n\nKeuntungan:\n- Harga spesial diskon 10%\n- Bonus Welkin Moon untuk pembelian di atas Rp 200.000\n- Proses cepat (5-10 menit)\n- Support semua server\n- Garansi 100% aman'
+                },
+                'topup5': {
+                    title: 'PUBG Mobile UC',
+                    price: 'Rp 20.000',
+                    image: 'https://via.placeholder.com/800x400?text=PubG+Detail',
+                    description: 'Top up UC PUBG Mobile untuk membeli skin dan item eksklusif. Proses cepat dan aman dengan garansi 100%.\n\nKeuntungan:\n- UC masuk dalam 5 menit\n- Bonus UC 5% untuk member baru\n- Skin eksklusif season 12\n- Support semua region\n- Garansi uang kembali'
+                },
+                'topup6': {
+                    title: 'Call of Duty Points',
+                    price: 'Rp 30.000',
+                    image: 'https://via.placeholder.com/800x400?text=COD+Detail',
+                    description: 'Top up CP Call of Duty Mobile untuk membeli battle pass dan skin legendaris. Bonus double CP untuk pembelian pertama.\n\nKeuntungan:\n- Bonus double CP pertama kali\n- Proses cepat 3-7 menit\n- Support semua region\n- Garansi CP masuk 100%\n- Bonus skin rare season 4'
+                },
+                'joki1': {
+                    title: 'Joki Rank Mobile Legends',
+                    price: 'Rp 50.000',
+                    image: 'https://via.placeholder.com/800x400?text=ML+Joki+Detail',
+                    description: 'Jasa joki rank Mobile Legends dari Epic ke Legend dengan winrate tinggi. Garansi tidak turun rank.\n\nLayanan termasuk:\n- Winrate di atas 80%\n- Pemain profesional\n- Garansi tidak turun rank\n- Laporan harian progress\n- Bisa request hero\n\nEstimasi waktu:\n- Epic I-III: 1-2 hari\n- Epic IV-Legend: 2-3 hari'
+                },
+                'joki2': {
+                    title: 'Joki Rank Free Fire',
+                    price: 'Rp 75.000',
+                    image: 'https://via.placeholder.com/800x400?text=FF+Joki+Detail',
+                    description: 'Jasa joki rank Free Fire dari Gold ke Diamond. Proses cepat dengan player profesional.\n\nLayanan termasuk:\n- Winrate di atas 75%\n- Player dengan K/D tinggi\n- Garansi tidak turun tier\n- Laporan progress harian\n- Bisa request weapon\n\nEstimasi waktu:\n- Gold I-III: 1-2 hari\n- Gold IV-Diamond: 2-4 hari'
+                },
+                'joki3': {
+                    title: 'Joki Rank Valorant',
+                    price: 'Rp 100.000',
+                    image: 'https://via.placeholder.com/800x400?text=Valorant+Joki+Detail',
+                    description: 'Jasa joki rank Valorant dari Iron ke Gold. Dibantu oleh player dengan rating Radiant.\n\nLayanan termasuk:\n- Player Radiant\n- Winrate di atas 85%\n- Garansi tidak turun rank\n- Laporan tiap match\n- Bisa request agent\n\nEstimasi waktu:\n- Iron I-III: 1 hari\n- Iron IV-Gold: 2-3 hari'
+                },
+                'joki4': {
+                    title: 'Joki Adventure Rank Genshin',
+                    price: 'Rp 150.000',
+                    image: 'https://via.placeholder.com/800x400?text=Genshin+Joki+Detail',
+                    description: 'Jasa meningkatkan Adventure Rank Genshin Impact dengan cepat. Termasuk quest dan material farming.\n\nLayanan termasuk:\n- Naik AR 1-10: 1 hari\n- Naik AR 10-20: 2 hari\n- Naik AR 20-30: 3 hari\n- Farming material\n- Quest story\n- Daily commission\n\nBonus:\n- Free artifact farming\n- Free material karakter'
+                },
+                'joki5': {
+                    title: 'Joki Tier PUBG Mobile',
+                    price: 'Rp 80.000',
+                    image: 'https://via.placeholder.com/800x400?text=PubG+Joki+Detail',
+                    description: 'Jasa meningkatkan tier PUBG Mobile dari Platinum ke Crown. Dibantu oleh player dengan K/D tinggi.\n\nLayanan termasuk:\n- Player Conqueror\n- K/D di atas 5.0\n- Garansi tidak turun tier\n- Laporan harian\n- Bisa request mode\n\nEstimasi waktu:\n- Platinum I-III: 1-2 hari\n- Platinum IV-Crown: 2-3 hari'
+                },
+                'joki6': {
+                    title: 'Joki Rank Arena of Valor',
+                    price: 'Rp 60.000',
+                    image: 'https://via.placeholder.com/800x400?text=AOV+Joki+Detail',
+                    description: 'Jasa joki rank Arena of Valor dari Gold ke Diamond. Proses cepat dengan winrate di atas 80%.\n\nLayanan termasuk:\n- Winrate 80%+\n- Player top global\n- Garansi tidak turun rank\n- Laporan progress\n- Bisa request hero\n\nEstimasi waktu:\n- Gold I-III: 1 hari\n- Gold IV-Diamond: 2 hari'
+                },
+                'akun1': {
+                    title: 'Akun Mobile Legends Mythic',
+                    price: 'Rp 500.000',
+                    image: 'https://via.placeholder.com/800x400?text=ML+Akun+Detail',
+                    description: 'Akun Mobile Legends tier Mythic dengan koleksi skin lengkap dan hero meta. Sudah verifikasi Moonton.\n\nDetail akun:\n- Tier Mythic 500+ points\n- 50+ skin elite\n- 10+ skin legend\n- 5 skin epic\n- Semua hero meta tersedia\n- Winrate 75%\n- Sudah verifikasi email & nomor\n\nBonus:\n- Free name change\n- Free 1000 diamond'
+                },
+                'akun2': {
+                    title: 'Akun Free Fire Heroic',
+                    price: 'Rp 750.000',
+                    image: 'https://via.placeholder.com/800x400?text=FF+Akun+Detail',
+                    description: 'Akun Free Fire tier Heroic dengan skin elite dan karakter langka. Sudah verifikasi Garena.\n\nDetail akun:\n- Tier Heroic season 15\n- 30+ skin senjata\n- 10 karakter elite\n- 5 karakter legendaris\n- 5000+ UC\n- K/D 5.0\n- Sudah verifikasi\n\nBonus:\n- Free name change\n- Free 1000 UC'
+                },
+                'akun3': {
+                    title: 'Akun Valorant Radiant',
+                    price: 'Rp 1.200.000',
+                    image: 'https://via.placeholder.com/800x400?text=Valorant+Akun+Detail',
+                    description: 'Akun Valorant tier Radiant dengan koleksi skin premium dan battle pass lengkap. Sudah verifikasi Riot.\n\nDetail akun:\n- Tier Radiant season 3\n- 10+ skin premium\n- Battle pass season 1-3 lengkap\n- Semua agent unlocked\n- Rank rating 450+\n- Sudah verifikasi\n\nBonus:\n- Free 1000 VP\n- Free name change'
+                },
+                'akun4': {
+                    title: 'Akun Genshin Impact AR55',
+                    price: 'Rp 800.000',
+                    image: 'https://via.placeholder.com/800x400?text=Genshin+Akun+Detail',
+                    description: 'Akun Genshin Impact Adventure Rank 55 dengan 5 karakter 5* dan senjata 5*. Primogem masih banyak.\n\nDetail akun:\n- AR55\n- 5 karakter 5* (termasuk limited)\n- 3 senjata 5*\n- 10.000+ primogem\n- Quest archon lengkap\n- Map 100% explored\n- Sudah verifikasi\n\nBonus:\n- Free welkin moon 30 hari\n- Free name change'
+                },
+                'akun5': {
+                    title: 'Akun PUBG Mobile Conqueror',
+                    price: 'Rp 900.000',
+                    image: 'https://via.placeholder.com/800x400?text=PubG+Akun+Detail',
+                    description: 'Akun PUBG Mobile tier Conqueror dengan skin elite dan UC berlimpah. Sudah verifikasi Tencent.\n\nDetail akun:\n- Tier Conqueror season 12\n- 20+ skin elite\n- 5 skin mythic\n- 10.000+ UC\n- K/D 6.0\n- Sudah verifikasi\n\nBonus:\n- Free name change\n- Free 2000 UC'
+                },
+                'akun6': {
+                    title: 'Akun LoL Challenger',
+                    price: 'Rp 1.500.000',
+                    image: 'https://via.placeholder.com/800x400?text=LoL+Akun+Detail',
+                    description: 'Akun League of Legends tier Challenger dengan koleksi skin lengkap dan champion meta. Sudah verifikasi Riot.\n\nDetail akun:\n- Tier Challenger season 10\n- 100+ skin (termasuk ultimate)\n- Semua champion unlocked\n- 50.000+ blue essence\n- Winrate 70%\n- Sudah verifikasi\n\nBonus:\n- Free name change\n- Free 2000 RP'
+                }
+            };
+
+            const data = productData[id];
+            title.textContent = data.title;
+            price.textContent = data.price;
+            image.src = data.image;
+            image.alt = data.title;
+            desc.textContent = data.description;
+
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevent background scroll
         }
 
         function closeModal() {
             document.getElementById('info-modal').style.display = 'none';
+            document.getElementById('product-modal').style.display = 'none';
             document.body.style.overflow = 'auto'; // Restore background scroll
         }
 
         // Close modal when clicking outside content
         window.onclick = function(event) {
-            const modal = document.getElementById('info-modal');
-            if (event.target == modal) {
-                modal.style.display = 'none';
+            const infoModal = document.getElementById('info-modal');
+            const productModal = document.getElementById('product-modal');
+            if (event.target == infoModal) {
+                infoModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
             }
+            if (event.target == productModal) {
+                productModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Buy product function - opens WhatsApp with predefined message
+        function buyProduct(productName) {
+            const phoneNumber = '6285691046873'; // Your WhatsApp number
+            const message = `Saya Ingin Membeli Produk "${productName}" Apakah masih ada?`;
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
         }
 
         // Start counter when page loads
         window.addEventListener('load', function() {
-            animateValue("customerCount", 0, 117, 2000);
+            animateValue("customerCount", 0, 284, 2000);
             setTimeout(function() {
                 document.querySelector('.loader').style.opacity = '0';
                 setTimeout(function() {
