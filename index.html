@@ -31,8 +31,7 @@
             overflow-x: hidden;
             position: relative;
         }
-        
-
+               
         header {
             background: var(--gradient);
             padding: 1.5rem;
@@ -864,6 +863,10 @@
     </style>
 </head>
 <body>
+    <div class="loader">
+        <div class="loader-spinner"></div>
+    </div>
+    
     <header>
         <nav>
             <div class="logo">ZIAANSTORE</div>
@@ -1578,24 +1581,26 @@
                     ]
                 },
                 'akun1': {
-                    title: 'Akun Free Fire [ BUKAN AKUN ADMIN ]',
-                    price: 'Rp 130.000 ex',
+                    title: 'Akun Mobile Legends Mythic',
+                    price: 'Rp 500.000 - Rp 2.500.000',
                     images: [
-                        'https://files.catbox.moe/eiidtq.jpg'
+                        'https://files.catbox.moe/w4x5y6.jpg',
+                        'https://files.catbox.moe/z7a8b9.jpg',
+                        'https://files.catbox.moe/c1d2e3.jpg'
                     ],
-                    description: 'Akun Free Fire Dengan Vault Event Naruto SG One Piece (OPM) cocok buat isian🤤, Serta Skin Vault/Senjata Keren Lainnya!, Akun Sudah Verifikasi Google.',
+                    description: 'Akun Mobile Legends tier Mythic dengan koleksi skin lengkap dan hero meta. Sudah verifikasi Moonton. Akun aman dan bisa diganti email serta nomor telepon.',
                     features: [
-                        'Login : Google',
-                        'Two Factor Authentication : OFF',
-                        'Vault Baju : 324+',
-                        'Vault Senjata : 160',
-                        'Level Akun : 56',
-                        'Full Spek Ada Di Foto Rek'
-                        'Tidak Menerima Kirkon!'
+                        'Tier Mythic 500+ points',
+                        '50+ skin elite',
+                        '10+ skin legend',
+                        '5 skin epic',
+                        'Semua hero meta tersedia',
+                        'Winrate 75%',
+                        'Sudah verifikasi email & nomor'
                     ]
                 },
                 'akun2': {
-                    title: 'Akun Free Fire ',
+                    title: 'Akun Free Fire Heroic',
                     price: 'Rp 750.000 - Rp 3.000.000',
                     images: [
                         'https://files.catbox.moe/wx5lm0.png',
@@ -1604,10 +1609,12 @@
                     ],
                     description: 'Akun Free Fire tier Heroic dengan skin elite dan karakter langka. Sudah verifikasi Garena. Akun aman dan bisa diganti email serta nomor telepon.',
                     features: [
+                        'Tier Heroic season 15',
                         '30+ skin senjata',
                         '10 karakter elite',
                         '5 karakter legendaris',
                         '5000+ UC',
+                        'K/D 5.0',
                         'Sudah verifikasi email & nomor'
                     ]
                 },
@@ -1808,7 +1815,7 @@
         // Buy product function - opens WhatsApp with predefined message
         function buyProduct(productName) {
             const phoneNumber = '6285691046873'; // Your WhatsApp number
-            const message = `Saya Ingin Membeli Produk/Jasa "${productName}" Apakah masih tersedia?`;
+            const message = `Halo permisi saya melihat postingan Produk/jasa Tersebut Di ziaanofficial.github.io , Saya tertarik Dan Ingin Membeli Produk/Jasa Bernama "${productName}" Apakah masih tersedia? [Kode Pesananan : 629JZ].`;
             const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
         }
