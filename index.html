@@ -43,6 +43,7 @@
             justify-content: center;
             align-items: center;
             z-index: 9999;
+            transition: opacity 0.5s ease;
         }
         
         .loader-spinner {
@@ -667,23 +668,27 @@
             position: relative;
             height: 250px;
             overflow: hidden;
+            touch-action: pan-y;
         }
 
         .gallery-slides {
             display: flex;
             height: 100%;
-            transition: transform 0.5s ease;
+            transition: transform 0.3s ease-out;
+            will-change: transform;
         }
 
         .gallery-slide {
             min-width: 100%;
             position: relative;
+            user-select: none;
         }
 
         .gallery-slide img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            pointer-events: none;
         }
 
         /* Product Card Content */
@@ -792,23 +797,27 @@
             overflow: hidden;
             margin-bottom: 1.5rem;
             border-radius: var(--curve);
+            touch-action: pan-y;
         }
 
         .modal-gallery-slides {
             display: flex;
             height: 100%;
-            transition: transform 0.5s ease;
+            transition: transform 0.3s ease-out;
+            will-change: transform;
         }
 
         .modal-gallery-slide {
             min-width: 100%;
             position: relative;
+            user-select: none;
         }
 
         .modal-gallery-slide img {
             width: 100%;
             height: 100%;
             object-fit: contain;
+            pointer-events: none;
         }
 
         /* Features List */
@@ -877,6 +886,10 @@
     </style>
 </head>
 <body>
+    <div class="loader">
+        <div class="loader-spinner"></div>
+    </div>
+    
     <header>
         <nav>
             <div class="logo">ZIAANSTORE</div>
@@ -1302,37 +1315,116 @@
                 const slides = gallery.querySelector('.gallery-slides');
                 const slideItems = gallery.querySelectorAll('.gallery-slide');
                 let currentIndex = 0;
+                let startX = 0;
+                let isDragging = false;
                 let autoSlideInterval;
                 
+                // Function to update slide position
                 function updateSlide() {
                     slides.style.transform = `translateX(-${currentIndex * 100}%)`;
                 }
                 
+                // Function to go to next slide
                 function nextSlide() {
                     currentIndex = (currentIndex + 1) % slideItems.length;
                     updateSlide();
                 }
                 
+                // Function to start auto sliding (2 minutes interval)
                 function startAutoSlide() {
-                    autoSlideInterval = setInterval(nextSlide, 3000);
+                    autoSlideInterval = setInterval(nextSlide, 120000); // 120000ms = 2 minutes
                 }
                 
-                function resetAutoSlide() {
-                    clearInterval(autoSlideInterval);
-                    startAutoSlide();
-                }
+                // Touch start event
+                gallery.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                    isDragging = true;
+                    clearInterval(autoSlideInterval); // Pause auto slide during manual interaction
+                }, { passive: true });
                 
-                // Start auto sliding
-                startAutoSlide();
+                // Touch move event
+                gallery.addEventListener('touchmove', (e) => {
+                    if (!isDragging) return;
+                    const x = e.touches[0].clientX;
+                    const diff = startX - x;
+                    
+                    // Move the slides while dragging
+                    slides.style.transition = 'none';
+                    slides.style.transform = `translateX(calc(-${currentIndex * 100}% - ${diff}px))`;
+                }, { passive: true });
                 
-                // Pause on hover
-                gallery.addEventListener('mouseenter', () => {
-                    clearInterval(autoSlideInterval);
+                // Touch end event
+                gallery.addEventListener('touchend', (e) => {
+                    if (!isDragging) return;
+                    isDragging = false;
+                    
+                    const x = e.changedTouches[0].clientX;
+                    const diff = startX - x;
+                    slides.style.transition = 'transform 0.3s ease-out';
+                    
+                    // Determine if we should change slide
+                    if (diff > 50 && currentIndex < slideItems.length - 1) {
+                        // Swipe left - go to next slide
+                        currentIndex++;
+                    } else if (diff < -50 && currentIndex > 0) {
+                        // Swipe right - go to previous slide
+                        currentIndex--;
+                    }
+                    
+                    updateSlide();
+                    startAutoSlide(); // Restart auto slide after manual interaction
+                }, { passive: true });
+                
+                // Mouse events for desktop
+                gallery.addEventListener('mousedown', (e) => {
+                    startX = e.clientX;
+                    isDragging = true;
+                    clearInterval(autoSlideInterval); // Pause auto slide during manual interaction
+                    e.preventDefault(); // Prevent text selection
+                });
+                
+                gallery.addEventListener('mousemove', (e) => {
+                    if (!isDragging) return;
+                    const x = e.clientX;
+                    const diff = startX - x;
+                    
+                    // Move the slides while dragging
+                    slides.style.transition = 'none';
+                    slides.style.transform = `translateX(calc(-${currentIndex * 100}% - ${diff}px))`;
+                });
+                
+                gallery.addEventListener('mouseup', (e) => {
+                    if (!isDragging) return;
+                    isDragging = false;
+                    
+                    const x = e.clientX;
+                    const diff = startX - x;
+                    slides.style.transition = 'transform 0.3s ease-out';
+                    
+                    // Determine if we should change slide
+                    if (diff > 50 && currentIndex < slideItems.length - 1) {
+                        // Swipe left - go to next slide
+                        currentIndex++;
+                    } else if (diff < -50 && currentIndex > 0) {
+                        // Swipe right - go to previous slide
+                        currentIndex--;
+                    }
+                    
+                    updateSlide();
+                    startAutoSlide(); // Restart auto slide after manual interaction
                 });
                 
                 gallery.addEventListener('mouseleave', () => {
-                    startAutoSlide();
+                    if (isDragging) {
+                        isDragging = false;
+                        slides.style.transition = 'transform 0.3s ease-out';
+                        updateSlide();
+                        startAutoSlide(); // Restart auto slide after manual interaction
+                    }
                 });
+                
+                // Start auto sliding initially
+                startAutoSlide();
             });
         }
         
@@ -1611,32 +1703,116 @@
             if (slideItems.length === 0) return;
             
             let currentIndex = 0;
+            let startX = 0;
+            let isDragging = false;
             let autoSlideInterval;
             
+            // Function to update slide position
             function updateSlide() {
                 slides.style.transform = `translateX(-${currentIndex * 100}%)`;
             }
             
+            // Function to go to next slide
             function nextSlide() {
                 currentIndex = (currentIndex + 1) % slideItems.length;
                 updateSlide();
             }
             
+            // Function to start auto sliding (2 minutes interval)
             function startAutoSlide() {
-                autoSlideInterval = setInterval(nextSlide, 15000);
+                autoSlideInterval = setInterval(nextSlide, 120000); // 120000ms = 2 minutes
             }
             
-            // Start auto sliding
-            startAutoSlide();
+            // Touch start event
+            gallery.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+                clearInterval(autoSlideInterval); // Pause auto slide during manual interaction
+            }, { passive: true });
             
-            // Pause on hover
-            gallery.addEventListener('mouseenter', () => {
-                clearInterval(autoSlideInterval);
+            // Touch move event
+            gallery.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const x = e.touches[0].clientX;
+                const diff = startX - x;
+                
+                // Move the slides while dragging
+                slides.style.transition = 'none';
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% - ${diff}px))`;
+            }, { passive: true });
+            
+            // Touch end event
+            gallery.addEventListener('touchend', (e) => {
+                if (!isDragging) return;
+                isDragging = false;
+                
+                const x = e.changedTouches[0].clientX;
+                const diff = startX - x;
+                slides.style.transition = 'transform 0.3s ease-out';
+                
+                // Determine if we should change slide
+                if (diff > 50 && currentIndex < slideItems.length - 1) {
+                    // Swipe left - go to next slide
+                    currentIndex++;
+                } else if (diff < -50 && currentIndex > 0) {
+                    // Swipe right - go to previous slide
+                    currentIndex--;
+                }
+                
+                updateSlide();
+                startAutoSlide(); // Restart auto slide after manual interaction
+            }, { passive: true });
+            
+            // Mouse events for desktop
+            gallery.addEventListener('mousedown', (e) => {
+                startX = e.clientX;
+                isDragging = true;
+                clearInterval(autoSlideInterval); // Pause auto slide during manual interaction
+                e.preventDefault(); // Prevent text selection
+            });
+            
+            gallery.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                const x = e.clientX;
+                const diff = startX - x;
+                
+                // Move the slides while dragging
+                slides.style.transition = 'none';
+                slides.style.transform = `translateX(calc(-${currentIndex * 100}% - ${diff}px))`;
+            });
+            
+            gallery.addEventListener('mouseup', (e) => {
+                if (!isDragging) return;
+                isDragging = false;
+                
+                const x = e.clientX;
+                const diff = startX - x;
+                slides.style.transition = 'transform 0.3s ease-out';
+                
+                // Determine if we should change slide
+                if (diff > 50 && currentIndex < slideItems.length - 1) {
+                    // Swipe left - go to next slide
+                    currentIndex++;
+                } else if (diff < -50 && currentIndex > 0) {
+                    // Swipe right - go to previous slide
+                    currentIndex--;
+                }
+                
+                updateSlide();
+                startAutoSlide(); // Restart auto slide after manual interaction
             });
             
             gallery.addEventListener('mouseleave', () => {
-                startAutoSlide();
+                if (isDragging) {
+                    isDragging = false;
+                    slides.style.transition = 'transform 0.3s ease-out';
+                    updateSlide();
+                    startAutoSlide(); // Restart auto slide after manual interaction
+                }
             });
+            
+            // Start auto sliding initially
+            startAutoSlide();
         }
 
         function closeModal() {
